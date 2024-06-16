@@ -1,0 +1,2 @@
+{"soft": None} {"soft": None} {"soft": None} {"soft":"A"} {"mask"} {"soft":"sentence"} {"soft":":"} {"meta": "entity"} . {"placeholder": "text_a"} {"soft": None} {"soft": None}
+{"placeholder": "text_a"}. In this sentence, {"meta": "entity"} is a {"mask"}.

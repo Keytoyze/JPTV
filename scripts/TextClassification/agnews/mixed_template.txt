@@ -1,0 +1,2 @@
+{"soft": None} {"soft": None} {"soft": None} {"soft":"A"} {"mask"} {"soft":"sentence"} {"soft":":"} {"placeholder": "text_a"}  {"placeholder": "text_b"} {"soft": None} {"soft": None}
+{"placeholder": "text_a"} {"placeholder": "text_b"} {"soft":"This"} topic {"soft":"is about"} {"mask"}.

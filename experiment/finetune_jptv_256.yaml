@@ -1,0 +1,103 @@
+dataset:
+  name: agnews
+  path: datasets/TextClassification/agnews
+
+plm:
+  model_name: roberta
+  model_path: roberta-large
+  optimize:
+    freeze_para: True
+    lr: 0.00003
+    weight_decay: 0.01
+    scheduler:
+      type: 
+      num_warmup_steps: 500
+
+checkpoint:
+  save_latest: False
+  save_best: False
+
+train:
+  batch_size: 8 # ====== 8
+  num_epochs: 30
+  train_verblizer: pre
+  clean: True
+  shuffle_data: False
+
+test:
+  batch_size: 64
+
+template: mixed_template
+verbalizer: jptv_verbalizer
+
+manual_template:
+  choice: 0
+  file_path: scripts/TextClassification/agnews/manual_template.txt
+
+soft_verbalizer:
+  parent_config: verbalizer
+  choice: 0
+  file_path: scripts/TextClassification/agnews/manual_verbalizer.txt
+  num_classes: 4
+  random_init: true
+  optimize:
+    lr: 0.001
+    weight_decay: 0.0
+    scheduler:
+      num_warmup_steps: 0
+
+mixed_template:
+  choice: 0
+  file_path: scripts/TextClassification/agnews/mixed_template.txt
+  ckpt_path: pretrained_weights/jptv_256/pretrain_embedding_0_2048.pt
+  optimize:
+    lr: 0.003
+    weight_decay: 0.0
+    scheduler:
+      num_warmup_steps: 0
+
+jptv_verbalizer:
+  parent_config: verbalizer
+  choice: 0
+  file_path: scripts/TextClassification/agnews/manual_verbalizer.txt
+  head_ckpt_path: pretrained_weights/jptv_256/pretrain_head_0_2048.pt
+  lr: 0.01
+  mid_dim: 256
+  epochs: 30
+
+manual_verbalizer:
+  choice: 0
+  file_path: scripts/TextClassification/agnews/manual_verbalizer.txt
+
+knowledgeable_verbalizer:
+  choice: 0
+  file_path: scripts/TextClassification/agnews/knowledgeable_verbalizer.txt
+
+environment:
+  num_gpus: 1
+  cuda_visible_devices:
+    - 0
+  local_rank: 0
+
+learning_setting: few_shot
+
+few_shot:
+  parent_config: learning_setting
+  few_shot_sampling: sampling_from_train
+  
+sampling_from_train:
+  parent_config: few_shot_sampling
+  num_examples_per_label: 1
+  also_sample_dev: True
+  num_examples_per_label_dev: 1
+  noisy_samples: 0
+  seed:
+    - 123
+    - 456
+    - 789
+    - 321
+    - 654
+
+
+reproduce:  # seed for reproduction 
+  seed: 123  # a seed for all random part

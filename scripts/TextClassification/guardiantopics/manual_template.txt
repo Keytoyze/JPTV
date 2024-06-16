@@ -1,0 +1,4 @@
+ A {"mask"} article : {"placeholder": "text_a"} 
+ {"placeholder": "text_a"} This topic is about {"mask"} .
+ [ Category : {"mask"} ] {"placeholder": "text_a"}
+ [ Topic : {"mask"} ] {"placeholder": "text_a"}
